@@ -3,6 +3,7 @@
 
 # In[27]:
 #Link case: https://docs.google.com/presentation/d/1F9KeHI5aldbMunOVy67v_TFhKlQf0toLIW1RWoB9k5s
+
 #Step 1: install PuLP (use Google search to know how)
 #Step 2: open IDE (sublime_text,jupyter notebook,spyder, microsoft visual studio...) to run code below
 
@@ -11,13 +12,14 @@ from pulp import *
 # Initialize model
 model = LpProblem("Minimize Transportation Costs", LpMinimize)
 
-# Build the lists and the demand dictionary
+# Build the plants and the demand dictionary
  # Sets
 plants_var = ['Ethiopia', 'Tanzania','Nigeria']
 demand_var = ['Ginko', 'Kola']
- # Dictionary
 plants_cap = [425,400,750]
 demand_num = [550, 450]
+
+ # Dictionary
 demand = dict(zip(demand_var, demand_num))
 plants = dict(zip(plants_var, plants_cap))
 
@@ -34,12 +36,14 @@ var = LpVariable.dicts("Shipments",(plants_var,demand_var),0,None,LpInteger)
 model += lpSum([cost[i][j] * var[i][j] 
                 for (i,j) in routes])
 
-# For each customer, sum plants shipments and set equal to customer demand
+# For each plant, sum products and set smaller than or equal to plant capacity
 for i in plants_var:
     model += lpSum([var[i][j] for j in demand_var]) <= plants[i]
+# For each customer, sum plants shipments and set equal to customer demand
 for j in demand_var:
     model += lpSum([var[i][j] for i in plants_var]) == demand[j]
-    
+  
+# Solve the model and get result   
 model.solve()
 print("Status:", LpStatus[model.status])
 for v in model.variables():
