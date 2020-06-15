@@ -3,7 +3,8 @@
 
 # In[27]:
 #Link case: https://docs.google.com/presentation/d/1F9KeHI5aldbMunOVy67v_TFhKlQf0toLIW1RWoB9k5s
-
+#Step 1: install PuLP (use Google search to know how)
+#Step 2: open IDE (sublime_text,jupyter notebook,spyder, microsoft visual studio...) to run code below
 #Ipsum function can help you to tackle the complex problems
 from pulp import *
 
