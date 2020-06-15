@@ -7,14 +7,14 @@
 #Ipsum function can help you to tackle the complex problems
 from pulp import *
 
-# Initialize Model
+# Initialize model
 model = LpProblem("Minimize Transportation Costs", LpMinimize)
 
 # Build the lists and the demand dictionary
- #Sets
+ # Sets
 plants_var = ['Ethiopia', 'Tanzania','Nigeria']
 demand_var = ['Ginko', 'Kola']
- #Dictionary
+ # Dictionary
 plants_cap = [425,400,750]
 demand_num = [550, 450]
 demand = dict(zip(demand_var, demand_num))
@@ -29,7 +29,7 @@ cost={'Ethiopia':{'Ginko':21  , 'Kola':22.5},
 routes= [(i,j) for i in plants_var for j in demand_var]
 var = LpVariable.dicts("Shipments",(plants_var,demand_var),0,None,LpInteger)
 
-# Define Objective Function
+# Define objective function
 model += lpSum([cost[i][j] * var[i][j] 
                 for (i,j) in routes])
 
