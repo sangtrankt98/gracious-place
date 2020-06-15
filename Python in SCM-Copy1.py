@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # In[27]:
-
+#Link source: https://docs.google.com/presentation/d/1F9KeHI5aldbMunOVy67v_TFhKlQf0toLIW1RWoB9k5s
 
 #Ipsum function can help you to tackle the complex problems
 from pulp import *
